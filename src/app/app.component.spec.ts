@@ -1,12 +1,19 @@
 import { TestBed } from '@angular/core/testing';
 import { AppComponent } from './app.component';
-
+// import {
+//   HttpClientTestingModule,
+//   HttpTestingController,
+// } from '@angular/common/http/testing';
+import { HttpClientModule } from '@angular/common/http';
+import { UserService } from './services';
+import { ValidatorService } from './services/validator.service';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 describe('AppComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [
-        AppComponent
-      ],
+      declarations: [AppComponent],
+      imports: [FormsModule, ReactiveFormsModule, HttpClientModule],
+      providers: [UserService, ValidatorService],
     }).compileComponents();
   });
 
@@ -14,18 +21,5 @@ describe('AppComponent', () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
     expect(app).toBeTruthy();
-  });
-
-  it(`should have as title 'test'`, () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    expect(app.title).toEqual('test');
-  });
-
-  it('should render title', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.content span')?.textContent).toContain('test app is running!');
   });
 });
