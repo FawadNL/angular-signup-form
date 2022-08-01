@@ -73,15 +73,15 @@
 
           <p class="text-danger" *ngIf="
           userForm.get('confirm_password')?.hasError('required') &&
-          userForm.get('password')?.touched">* Confirm password is required</p>
+          userForm.get('confirm_password')?.touched">* Confirm password is required</p>
 
           <p class="text-danger" *ngIf="
           userForm.get('confirm_password')?.hasError('minlength') &&
           userForm.get('confirm_password')?.touched">* Minimum 8 characters required</p>
 
           <p class="text-danger" *ngIf="
-          userForm.get('password')?.hasError('passwordMissMatch') &&
-          userForm.get('password')?.touched">* Confirm password doesn't match</p>
+          userForm.get('confirm_password')?.hasError('passwordMissMatch') &&
+          userForm.get('confirm_password')?.touched">* Confirm password doesn't match</p>
 
         </div>
 

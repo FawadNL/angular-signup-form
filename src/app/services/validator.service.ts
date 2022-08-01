@@ -19,10 +19,10 @@ export class ValidatorService {
       if (firstName && lastName && password) {
         if (password.includes(firstName)) {
           userForm.get('password')?.setErrors({ passwordIncludeFirst: true });
-          return { error: true };
+          return { error: false };
         } else if (password.includes(lastName)) {
           userForm.get('password')?.setErrors({ passwordIncludeLast: true });
-          return { error: true };
+          return { error: false };
         }
       }
       return null;
@@ -65,11 +65,11 @@ export class ValidatorService {
       const password = userForm.get('password')?.value;
       const confirmPass = userForm.get('confirm_password')?.value;
       if (confirmPass && password) {
-        if (confirmPass === password) {
+        if (confirmPass !== password) {
           userForm
             .get('confirm_password')
             ?.setErrors({ passwordMissMatch: true });
-          return { error: true };
+          return { error: false };
         }
       }
       return null;

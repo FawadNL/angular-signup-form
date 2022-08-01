@@ -43,10 +43,14 @@ export class AppComponent {
         confirm_password: this.fb.control('', [
           Validators.required,
           Validators.minLength(8),
-          this.validatorService.confirmPasswordValidator,
         ]),
       },
-      { validators: this.validatorService.passwordValidator() }
+      {
+        validators: [
+          this.validatorService.passwordValidator(),
+          this.validatorService.confirmPasswordValidator(),
+        ],
+      }
     );
   }
 
