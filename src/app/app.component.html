@@ -10,7 +10,6 @@
       <h3 class="text-center pb-3">Signup User</h3>
       <form [formGroup]="userForm">
         <div class="mb-3">
-          <!-- <label for="firstName" class="form-label">First Name</label> -->
           <input type="text" class="form-control" id="firstName" placeholder="Enter first name"
             formControlName="firstName">
 
@@ -20,7 +19,6 @@
 
         </div>
         <div class="mb-3">
-          <!-- <label for="lastName" class="form-label">Last Name</label> -->
           <input type="text" class="form-control" id="lastName" placeholder="Enter last name"
             formControlName="lastName">
           <p class="text-danger" *ngIf="
@@ -28,20 +26,20 @@
             userForm.get('lastName')?.touched">* Last Name is required</p>
         </div>
         <div class="mb-3">
-          <!-- <label for="email" class="form-label">Email</label> -->
           <input type="email" class="form-control" id="email" placeholder="Enter Email" formControlName="email">
 
           <p class="text-danger" *ngIf="
           userForm.get('email')?.hasError('required') &&
           userForm.get('email')?.touched">* Email is required</p>
-          <p class="text-danger" *ngIf="
-          userForm.get('email')?.hasError('email') &&
-          userForm.get('email')?.touched">* Please enter valid email</p>
+
+          <p class="text-danger" *ngIf="userForm.get('email')?.hasError('pattern') &&
+          userForm.get('email')?.touched">* Please enter valid email
+          </p>
 
         </div>
         <div class="mb-3">
-          <!-- <label for="password" class="form-label">Password</label> -->
-          <input type="password" class="form-control" id="password" placeholder="********" formControlName="password">
+          <input type="password" class="form-control" id="password" placeholder="Enter password"
+            formControlName="password">
 
           <p class="text-danger" *ngIf="
           userForm.get('password')?.hasError('required') &&
@@ -52,8 +50,12 @@
           userForm.get('password')?.touched">* Minimum 8 characters required</p>
 
           <p class="text-danger" *ngIf="
-          userForm.get('password')?.hasError('passwordInclude') &&
-          userForm.get('password')?.touched">* Password include first or last name</p>
+          userForm.get('password')?.hasError('passwordIncludeFirst') &&
+          userForm.get('password')?.touched">* Password should not include first name</p>
+
+          <p class="text-danger" *ngIf="
+          userForm.get('password')?.hasError('passwordIncludeLast') &&
+          userForm.get('password')?.touched">* Password should not include last name</p>
 
           <p class="text-danger" *ngIf="
           userForm.get('password')?.hasError('uppercaseError') &&
@@ -64,6 +66,25 @@
           userForm.get('password')?.touched">* password must have one lowercase</p>
 
         </div>
+
+        <div class="mb-3">
+          <input type="password" class="form-control" id="confirm_password" placeholder="Enter confirm password"
+            formControlName="confirm_password">
+
+          <p class="text-danger" *ngIf="
+          userForm.get('confirm_password')?.hasError('required') &&
+          userForm.get('password')?.touched">* Confirm password is required</p>
+
+          <p class="text-danger" *ngIf="
+          userForm.get('confirm_password')?.hasError('minlength') &&
+          userForm.get('confirm_password')?.touched">* Minimum 8 characters required</p>
+
+          <p class="text-danger" *ngIf="
+          userForm.get('password')?.hasError('passwordMissMatch') &&
+          userForm.get('password')?.touched">* Confirm password doesn't match</p>
+
+        </div>
+
         <button type="button" class="btn btn-dark" (click)="signUp()" [disabled]="userForm.invalid">Signup</button>
       </form>
     </div>

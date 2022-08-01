@@ -20,18 +20,30 @@ export class AppComponent {
   }
 
   /**
-   * @description Initiate form control
+   * @description Initialize form controls.
+   *
+   * @return { void } Void return.
    */
-  initFormControl() {
+  initFormControl(): void {
+    // const emailRegex = '^[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$';
     this.userForm = this.fb.group(
       {
         firstName: this.fb.control('', [Validators.required]),
         lastName: this.fb.control('', [Validators.required]),
-        email: this.fb.control('', [Validators.required, Validators.email]),
+        email: this.fb.control('', [
+          Validators.required,
+          Validators.email,
+          Validators.pattern(/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/),
+        ]),
         password: this.fb.control('', [
           Validators.required,
           Validators.minLength(8),
           this.validatorService.passwordCaseValidator,
+        ]),
+        confirm_password: this.fb.control('', [
+          Validators.required,
+          Validators.minLength(8),
+          this.validatorService.confirmPasswordValidator,
         ]),
       },
       { validators: this.validatorService.passwordValidator() }
@@ -39,9 +51,10 @@ export class AppComponent {
   }
 
   /**
-   * @description Function to submit form data.
+   * @description Function for user registration.
+   * @return {void} Void return
    */
-  signUp() {
+  signUp(): void {
     this.userService.signupUser(this.userForm.value).subscribe({
       next: (response) => {
         alert('User registration successful');
