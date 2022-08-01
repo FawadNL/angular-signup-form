@@ -10,60 +10,61 @@
       <h3 class="text-center pb-3">Signup User</h3>
       <form [formGroup]="userForm">
         <div class="mb-3">
+
           <input type="text" class="form-control" id="firstName" placeholder="Enter first name"
             formControlName="firstName">
-
           <p class="text-danger" *ngIf="
           userForm.get('firstName')?.hasError('required') &&
-          userForm.get('firstName')?.touched">* First name is required</p>
-
+          userForm.get('firstName')?.touched">* {{ValidationMsg.firstName.required}}</p>
         </div>
+
         <div class="mb-3">
           <input type="text" class="form-control" id="lastName" placeholder="Enter last name"
             formControlName="lastName">
           <p class="text-danger" *ngIf="
             userForm.get('lastName')?.hasError('required') &&
-            userForm.get('lastName')?.touched">* Last Name is required</p>
+            userForm.get('lastName')?.touched">* {{ValidationMsg.lastName.required}}</p>
         </div>
+
         <div class="mb-3">
           <input type="email" class="form-control" id="email" placeholder="Enter Email" formControlName="email">
 
           <p class="text-danger" *ngIf="
           userForm.get('email')?.hasError('required') &&
-          userForm.get('email')?.touched">* Email is required</p>
+          userForm.get('email')?.touched">* {{ValidationMsg.email.required}}</p>
 
           <p class="text-danger" *ngIf="userForm.get('email')?.hasError('pattern') &&
-          userForm.get('email')?.touched">* Please enter valid email
+          userForm.get('email')?.touched">* {{ValidationMsg.email.pattern}}
           </p>
-
         </div>
+
         <div class="mb-3">
           <input type="password" class="form-control" id="password" placeholder="Enter password"
             formControlName="password">
 
           <p class="text-danger" *ngIf="
           userForm.get('password')?.hasError('required') &&
-          userForm.get('password')?.touched">* password is required</p>
+          userForm.get('password')?.touched">* {{ValidationMsg.password.required}}</p>
 
           <p class="text-danger" *ngIf="
           userForm.get('password')?.hasError('minlength') &&
-          userForm.get('password')?.touched">* Minimum 8 characters required</p>
+          userForm.get('password')?.touched">* {{ValidationMsg.password.minlength}}</p>
 
           <p class="text-danger" *ngIf="
           userForm.get('password')?.hasError('passwordIncludeFirst') &&
-          userForm.get('password')?.touched">* Password should not include first name</p>
+          userForm.get('password')?.touched">* {{ValidationMsg.password.passwordIncludeFirst}}</p>
 
           <p class="text-danger" *ngIf="
           userForm.get('password')?.hasError('passwordIncludeLast') &&
-          userForm.get('password')?.touched">* Password should not include last name</p>
+          userForm.get('password')?.touched">* {{ValidationMsg.password.passwordIncludeLast}}</p>
 
           <p class="text-danger" *ngIf="
           userForm.get('password')?.hasError('uppercaseError') &&
-          userForm.get('password')?.touched">* Password must have one uppercase</p>
+          userForm.get('password')?.touched">* {{ValidationMsg.password.uppercaseError}}</p>
 
           <p class="text-danger" *ngIf="
           userForm.get('password')?.hasError('lowercaseError') &&
-          userForm.get('password')?.touched">* password must have one lowercase</p>
+          userForm.get('password')?.touched">* {{ValidationMsg.password.lowercaseError}}</p>
 
         </div>
 
@@ -73,15 +74,11 @@
 
           <p class="text-danger" *ngIf="
           userForm.get('confirm_password')?.hasError('required') &&
-          userForm.get('confirm_password')?.touched">* Confirm password is required</p>
-
-          <p class="text-danger" *ngIf="
-          userForm.get('confirm_password')?.hasError('minlength') &&
-          userForm.get('confirm_password')?.touched">* Minimum 8 characters required</p>
+          userForm.get('confirm_password')?.touched">* {{ValidationMsg.confirm_password.required}}</p>
 
           <p class="text-danger" *ngIf="
           userForm.get('confirm_password')?.hasError('passwordMissMatch') &&
-          userForm.get('confirm_password')?.touched">* Confirm password doesn't match</p>
+          userForm.get('confirm_password')?.touched">* {{ValidationMsg.confirm_password.passwordMissMatch}}</p>
 
         </div>
 

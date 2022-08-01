@@ -16,13 +16,14 @@ export class ValidatorService {
       const firstName = userForm.get('firstName')?.value;
       const lastName = userForm.get('lastName')?.value;
       const password = userForm.get('password')?.value;
-      if (firstName && lastName && password) {
+      if (password) {
         if (password.includes(firstName)) {
           userForm.get('password')?.setErrors({ passwordIncludeFirst: true });
-          return { error: false };
-        } else if (password.includes(lastName)) {
+          return { error: true };
+        }
+        if (password.includes(lastName)) {
           userForm.get('password')?.setErrors({ passwordIncludeLast: true });
-          return { error: false };
+          return { error: true };
         }
       }
       return null;

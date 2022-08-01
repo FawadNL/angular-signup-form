@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserService } from 'src/app/services';
 import { ValidatorService } from 'src/app/services/validator.service';
+import { SignUpValidatorMessages } from 'src/config';
 
 @Component({
   selector: 'app-root',
@@ -11,6 +12,8 @@ import { ValidatorService } from 'src/app/services/validator.service';
 export class AppComponent {
   public userForm: FormGroup = new FormGroup({});
   public apiResponse: string = '';
+  // Validation messages for signup form.
+  public ValidationMsg = SignUpValidatorMessages;
   constructor(
     private fb: FormBuilder,
     private userService: UserService,
