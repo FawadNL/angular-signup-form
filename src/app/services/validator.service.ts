@@ -17,9 +17,12 @@ export class ValidatorService {
       const lastName = userForm.get('lastName')?.value;
       const password = userForm.get('password')?.value;
       if (firstName && lastName && password) {
-        if (password.includes(firstName) || password.includes(lastName)) {
-          userForm.get('password')?.setErrors({ passwordInclude: true });
-          return { error: false };
+        if (password.includes(firstName)) {
+          userForm.get('password')?.setErrors({ passwordIncludeFirst: true });
+          return { error: true };
+        } else if (password.includes(lastName)) {
+          userForm.get('password')?.setErrors({ passwordIncludeLast: true });
+          return { error: true };
         }
       }
       return null;
@@ -33,24 +36,43 @@ export class ValidatorService {
    * Reference for reg Exp :
    * https://www.geeksforgeeks.org/check-if-a-string-contains-uppercase-lowercase-special-characters-and-numeric-values/
    */
-  passwordCaseValidator(password: FormControl) {
+  passwordCaseValidator(password: FormControl): {
+    [key: string]: boolean;
+  } | null {
     if (password.pristine) {
       return null;
     }
     const UPPERCASE_REGEXP = /^(?=.*[A-Z])/;
-    // password.markAsTouched();
     if (!UPPERCASE_REGEXP.test(password.value)) {
       return {
         uppercaseError: true,
       };
     }
     const LOWERCASE_REGEXP = /^(?=.*[a-z])/;
-    // password.markAsTouched();
     if (!LOWERCASE_REGEXP.test(password.value)) {
       return {
         lowercaseError: true,
       };
     }
     return null;
+  }
+
+  /**
+   * @description Confirm password validator.
+   */
+  confirmPasswordValidator(): ValidatorFn {
+    return (userForm): { [key: string]: boolean } | null => {
+      const password = userForm.get('password')?.value;
+      const confirmPass = userForm.get('confirm_password')?.value;
+      if (confirmPass && password) {
+        if (confirmPass === password) {
+          userForm
+            .get('confirm_password')
+            ?.setErrors({ passwordMissMatch: true });
+          return { error: true };
+        }
+      }
+      return null;
+    };
   }
 }
