@@ -17,11 +17,11 @@ export class ValidatorService {
       const lastName = userForm.get('lastName')?.value;
       const password = userForm.get('password')?.value;
       if (password) {
-        if (password.includes(firstName)) {
+        if (firstName && password.includes(firstName)) {
           userForm.get('password')?.setErrors({ passwordIncludeFirst: true });
           return { error: true };
         }
-        if (password.includes(lastName)) {
+        if (lastName && password.includes(lastName)) {
           userForm.get('password')?.setErrors({ passwordIncludeLast: true });
           return { error: true };
         }

@@ -1,6 +1,6 @@
 export const SignUpValidatorMessages = {
   firstName: {
-    invalid: 'Invalid first name',
+    pattern: 'Invalid first name',
     required: 'First name is required',
   },
   lastName: {
@@ -18,9 +18,11 @@ export const SignUpValidatorMessages = {
     passwordIncludeLast: 'Password should not include last name',
     uppercaseError: 'Password must have one uppercase',
     lowercaseError: 'Password must have one lowercase',
+    pattern: 'Password should be without space',
   },
   confirm_password: {
     required: 'Confirm password is required',
     passwordMissMatch: `Confirm password doesn't match`,
+    pattern: 'Password should be without space',
   },
 };

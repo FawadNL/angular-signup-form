@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserService } from 'src/app/services';
 import { ValidatorService } from 'src/app/services/validator.service';
 import { SignUpValidatorMessages } from 'src/config';
+import { User } from 'src/model';
 
 @Component({
   selector: 'app-root',
@@ -28,10 +29,12 @@ export class AppComponent {
    * @return { void } Void return.
    */
   initFormControl(): void {
-    // const emailRegex = '^[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$';
     this.userForm = this.fb.group(
       {
-        firstName: this.fb.control('', [Validators.required]),
+        firstName: this.fb.control('', [
+          Validators.required,
+          Validators.pattern(/^[a-zA-Z]+$/),
+        ]),
         lastName: this.fb.control('', [Validators.required]),
         email: this.fb.control('', [
           Validators.required,
@@ -42,10 +45,12 @@ export class AppComponent {
           Validators.required,
           Validators.minLength(8),
           this.validatorService.passwordCaseValidator,
+          Validators.pattern(/^\S+$/),
         ]),
         confirm_password: this.fb.control('', [
           Validators.required,
           Validators.minLength(8),
+          Validators.pattern(/^\S+$/),
         ]),
       },
       {
@@ -63,8 +68,12 @@ export class AppComponent {
    */
   signUp(): void {
     this.userService.signupUser(this.userForm.value).subscribe({
-      next: (response) => {
-        alert('User registration successful');
+      next: (response: User) => {
+        if (response._id) {
+          alert('User registration successful');
+        } else {
+          alert('Unable to register user');
+        }
       },
       error: (err) => {
         alert('Something went wrong');
