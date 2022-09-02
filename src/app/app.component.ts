@@ -35,7 +35,10 @@ export class AppComponent {
           Validators.required,
           Validators.pattern(/^[a-zA-Z]+$/),
         ]),
-        lastName: this.fb.control('', [Validators.required]),
+        lastName: this.fb.control('', [
+          Validators.required,
+          Validators.pattern(/^[a-zA-Z]+$/),
+        ]),
         email: this.fb.control('', [
           Validators.required,
           Validators.email,

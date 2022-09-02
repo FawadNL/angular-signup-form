@@ -4,7 +4,7 @@ export const SignUpValidatorMessages = {
     required: 'First name is required',
   },
   lastName: {
-    invalid: 'Invalid last name',
+    pattern: 'Invalid last name',
     required: 'Last name is required',
   },
   email: {
