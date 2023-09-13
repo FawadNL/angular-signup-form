@@ -5,8 +5,8 @@ import { AppComponent } from './app.component';
 //   HttpTestingController,
 // } from '@angular/common/http/testing';
 import { HttpClientModule } from '@angular/common/http';
-import { UserService } from './services';
-import { ValidatorService } from './services/validator.service';
+import { UserService } from '../services';
+import { ValidatorService } from '../services/validator.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 describe('AppComponent', () => {
   beforeEach(async () => {
